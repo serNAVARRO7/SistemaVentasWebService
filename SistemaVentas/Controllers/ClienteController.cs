@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SistemaVentas.Models;
 using SistemaVentas.Models.Response;
+using SistemaVentas.Models.Request;
 using SistemaVentas.Models.ViewModels;
 
 namespace SistemaVentas.Controllers
@@ -15,7 +16,7 @@ namespace SistemaVentas.Controllers
     public class ClienteController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get() 
+        public IActionResult Get()
         {
             Respuesta oRespuesta = new Respuesta();
             try
@@ -27,7 +28,7 @@ namespace SistemaVentas.Controllers
                     oRespuesta.Data = lst;
                 }
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 oRespuesta.Mensaje = e.Message;
             }

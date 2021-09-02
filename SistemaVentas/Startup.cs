@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SistemaVentas.Data;
+using SistemaVentas.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace SistemaVentas
 {
     public class Startup
     {
+        readonly string MiCors = "MiCors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,6 +29,18 @@ namespace SistemaVentas
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MiCors, builder =>
+                {
+                    builder.WithOrigins("*");
+                });
+            });
+
+            services.AddControllers();
+
+            services.AddScoped<IUserService, UserService>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -54,6 +68,8 @@ namespace SistemaVentas
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors(MiCors);
 
             app.UseAuthentication();
             app.UseAuthorization();
