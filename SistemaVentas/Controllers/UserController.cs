@@ -14,6 +14,7 @@ namespace SistemaVentas.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class UserController : ControllerBase
     {
         private IUserService _userService;

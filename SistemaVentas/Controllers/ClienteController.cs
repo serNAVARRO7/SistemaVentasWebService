@@ -8,11 +8,13 @@ using SistemaVentas.Models;
 using SistemaVentas.Models.Response;
 using SistemaVentas.Models.Request;
 using SistemaVentas.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SistemaVentas.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ClienteController : ControllerBase
     {
         [HttpGet]
