@@ -66,6 +66,7 @@ namespace SistemaVentas
             });
             
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IVentaService, VentaService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
